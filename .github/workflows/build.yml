@@ -1,4 +1,5 @@
 name: Build Plugin
+run: mvn clean package
 
 on:
   push:
