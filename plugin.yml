@@ -1,0 +1,10 @@
+name: WoodsPixelBazaars
+version: 1.0
+main: my.bazaars.Main
+api-version: 1.21
+
+commands:
+  bazaar:
+    description: Open Bazaar
+  bz:
+    description: Bazaar shortcut
