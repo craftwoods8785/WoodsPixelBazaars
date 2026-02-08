@@ -1,5 +1,6 @@
 name: Build Plugin
 
+# Trigger build on push to main branch
 on:
   push:
     branches: [ "main" ]
@@ -9,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout your repo
+      # 1️⃣ Checkout your repository
       - uses: actions/checkout@v4
 
       # 2️⃣ Set up Java 17
@@ -19,11 +20,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      # 3️⃣ Maven Build Step
+      # 3️⃣ Build the plugin with Maven
       - name: Maven Build
         run: mvn clean package
 
-      # 4️⃣ Upload the generated JAR
+      # 4️⃣ Upload the JAR as artifact
       - name: Upload JAR
         uses: actions/upload-artifact@v4
         with:
