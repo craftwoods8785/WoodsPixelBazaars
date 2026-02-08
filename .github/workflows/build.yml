@@ -18,7 +18,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Build Plugin
-        run: mvn package
+        run: mvn clean package
 
       - name: Upload JAR
         uses: actions/upload-artifact@v4
