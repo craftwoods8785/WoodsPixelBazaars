@@ -1,31 +1,38 @@
-name: Build Plugin
+# Name of the workflow
+name: Build Minecraft Plugin
 
-# Trigger build on push to main branch
+# When to run this workflow
 on:
-  push:
+  push:            # Run on any push to main branch
     branches: [ "main" ]
+  pull_request:    # Also run on pull requests to main branch
+    branches: [ "main" ]
+  workflow_dispatch: # Allows manual trigger from Actions tab
 
 jobs:
   build:
+    # The environment to run in
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout your repository
-      - uses: actions/checkout@v4
+      # 1️⃣ Checkout the repository code
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-      # 2️⃣ Set up Java 17
+      # 2️⃣ Set up Java 17 environment
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
 
-      # 3️⃣ Build the plugin with Maven
+      # 3️⃣ Build the plugin using Maven
+      # mvn clean package: cleans old builds + compiles code + creates JAR
       - name: Maven Build
         run: mvn clean package
 
-      # 4️⃣ Upload the JAR as artifact
-      - name: Upload JAR
+      # 4️⃣ Upload the generated JAR so you can download it
+      - name: Upload Plugin JAR
         uses: actions/upload-artifact@v4
         with:
           name: Plugin-JAR
